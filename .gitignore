@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# generated files
+db.sqlite3
