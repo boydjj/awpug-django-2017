@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from httpbucket import views as httpbucket_views
+
 urlpatterns = [
+    url(r'^$', httpbucket_views.hello_world),
     url(r'^admin/', admin.site.urls),
 ]
