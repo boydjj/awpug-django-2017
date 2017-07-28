@@ -20,5 +20,6 @@ from httpbucket import views as httpbucket_views
 
 urlpatterns = [
     url(r'^$', httpbucket_views.hello_world),
+    url(r'^get/$', httpbucket_views.echo_get),
     url(r'^admin/', admin.site.urls),
 ]
