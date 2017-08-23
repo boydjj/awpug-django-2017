@@ -2,6 +2,9 @@ from django.db import models
 
 
 class RequestLogEntry(models.Model):
+    class Meta:
+        verbose_name_plural = "Request log entries"
+
     # we get `id` field as Primary Key by default
 
     # OPTIONS is the longest method name
