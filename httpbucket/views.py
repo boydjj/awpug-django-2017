@@ -3,6 +3,7 @@ import json
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.views import View
 
+from . import models
 
 def hello_world(request):
     return HttpResponse("Obligatory greeting!")
@@ -44,5 +45,14 @@ class EchoView(View):
             if new_key is not None:
                 headers[new_key.replace('_', '-').title()] = v
         response['headers'] = headers
+
+        request_log_entry = models.RequestLogEntry(
+            method='GET',
+            origin=response['origin'],
+            uri=response['url'],
+            headers=response['headers'],
+            args=response['args'],
+        )
+        request_log_entry.save()
 
         return HttpResponse(json.dumps(response, sort_keys=True))
