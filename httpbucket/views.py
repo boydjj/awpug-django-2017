@@ -2,6 +2,7 @@ import json
 
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.views import View
+from django.views.generic import DetailView
 
 from . import models
 
@@ -56,3 +57,7 @@ class EchoView(View):
         request_log_entry.save()
 
         return HttpResponse(json.dumps(response, sort_keys=True))
+
+
+class RequestLogEntryDetailView(DetailView):
+    model = models.RequestLogEntry

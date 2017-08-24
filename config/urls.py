@@ -22,5 +22,6 @@ from httpbucket import views as httpbucket_views
 urlpatterns = [
     url(r'^$', httpbucket_views.hello_world),
     url(r'^get/$', csrf_exempt(httpbucket_views.EchoView.as_view())),
+    url(r'^get/(?P<pk>\d+)/$', httpbucket_views.RequestLogEntryDetailView.as_view()),
     url(r'^admin/', admin.site.urls),
 ]
