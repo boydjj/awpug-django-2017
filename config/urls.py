@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^$', httpbucket_views.hello_world),
     url(r'^get/$', csrf_exempt(httpbucket_views.EchoView.as_view()), name='echo_get'),
     url(r'^get/(?P<pk>\d+)/$', httpbucket_views.RequestLogEntryDetailView.as_view(), name='replay_get'),
+    url(r'^create/$', httpbucket_views.RequestLogEntryCreateView.as_view(), name='create_replay'),
     url(r'^admin/', admin.site.urls),
 ]

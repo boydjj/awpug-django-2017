@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class RequestLogEntry(models.Model):
@@ -21,3 +22,6 @@ class RequestLogEntry(models.Model):
 
     # another JSON blob
     args = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('replay_get', kwargs={'pk': self.id})

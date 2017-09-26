@@ -1,10 +1,12 @@
 import json
 
-from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse
 from django.views import View
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 
+from httpbucket import forms
 from . import models
+
 
 def hello_world(request):
     return HttpResponse("Obligatory greeting!")
@@ -61,3 +63,8 @@ class EchoView(View):
 
 class RequestLogEntryDetailView(DetailView):
     model = models.RequestLogEntry
+
+
+class RequestLogEntryCreateView(CreateView):
+    model = models.RequestLogEntry
+    form_class = forms.RequestLogEntryForm
