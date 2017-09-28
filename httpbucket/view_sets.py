@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 from . import serializers
 
@@ -6,5 +6,8 @@ from . import models
 
 
 class RequestLogEntryViewSet(viewsets.ModelViewSet):
-    queryset = models.RequestLogEntry.objects.all()
     serializer_class = serializers.RequestLogEntrySerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        return models.RequestLogEntry.objects.filter(user=self.request.user)
