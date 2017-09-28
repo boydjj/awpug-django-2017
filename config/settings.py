@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'httpbucket',
     'registration',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

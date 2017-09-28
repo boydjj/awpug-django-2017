@@ -17,8 +17,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import routers
 
 from httpbucket import views as httpbucket_views
+from registration import view_sets as registration_view_sets
+
+router = routers.DefaultRouter()
+router.register(r'users', registration_view_sets.UserViewSet)
 
 urlpatterns = [
     url(r'^$', httpbucket_views.hello_world),
@@ -30,5 +35,7 @@ urlpatterns = [
     url(r'^create/$', httpbucket_views.RequestLogEntryCreateView.as_view(), name='create_replay'),
     url(r'^admin/', admin.site.urls),
     url(r'^oauth2/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    url('^', include('django.contrib.auth.urls')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include(router.urls)),
+    url(r'^', include('django.contrib.auth.urls')),
 ]
