@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^$', httpbucket_views.hello_world),
     url(r'^my_entries/$', httpbucket_views.RequestLogEntryListView.as_view(), name='my_entries'),
     url(r'^my_entries_json/$', login_required(httpbucket_views.MyEntriesJSONView.as_view()), name='my_entries_json'),
+    url(r'^my_entries_oauth2/$', login_required(httpbucket_views.MyEntriesOAuth2View.as_view()), name='my_entries_oauth2'),
     url(r'^get/$', csrf_exempt(httpbucket_views.EchoView.as_view()), name='echo_get'),
     url(r'^get/(?P<pk>\d+)/$', httpbucket_views.RequestLogEntryDetailView.as_view(), name='replay_get'),
     url(r'^create/$', httpbucket_views.RequestLogEntryCreateView.as_view(), name='create_replay'),

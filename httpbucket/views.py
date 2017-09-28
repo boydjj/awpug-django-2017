@@ -3,6 +3,7 @@ import json
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import DetailView, CreateView, ListView
+from oauth2_provider.views import ProtectedResourceView
 
 from httpbucket import forms
 from . import models
@@ -81,6 +82,13 @@ class RequestLogEntryListView(ListView):
 
 class MyEntriesJSONView(View):
     def get(self, request):
+        entries = models.RequestLogEntry.objects.filter(user=request.user)
+        result = [utils.model_to_dict(entry) for entry in entries]
+        return HttpResponse(json.dumps(result), content_type='application/json')
+
+
+class MyEntriesOAuth2View(ProtectedResourceView):
+    def get(self, request, *args, **kwargs):
         entries = models.RequestLogEntry.objects.filter(user=request.user)
         result = [utils.model_to_dict(entry) for entry in entries]
         return HttpResponse(json.dumps(result), content_type='application/json')
