@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
@@ -7,6 +8,9 @@ class RequestLogEntry(models.Model):
         verbose_name_plural = "Request log entries"
 
     # we get `id` field as Primary Key by default
+
+    # keep track of which user created this
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     # OPTIONS is the longest method name
     method = models.CharField(max_length=7)
