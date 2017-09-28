@@ -2,7 +2,7 @@ import json
 
 from django.http import HttpResponse
 from django.views import View
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, ListView
 
 from httpbucket import forms
 from . import models
@@ -68,3 +68,10 @@ class RequestLogEntryDetailView(DetailView):
 class RequestLogEntryCreateView(CreateView):
     model = models.RequestLogEntry
     form_class = forms.RequestLogEntryForm
+
+
+class RequestLogEntryListView(ListView):
+    model = models.RequestLogEntry
+
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user)
