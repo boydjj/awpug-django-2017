@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^get/(?P<pk>\d+)/$', httpbucket_views.RequestLogEntryDetailView.as_view(), name='replay_get'),
     url(r'^create/$', httpbucket_views.RequestLogEntryCreateView.as_view(), name='create_replay'),
     url(r'^admin/', admin.site.urls),
+    url(r'^oauth2/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url('^', include('django.contrib.auth.urls')),
 ]

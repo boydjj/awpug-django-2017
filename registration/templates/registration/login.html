@@ -3,4 +3,5 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button>Log in</button>
+    <input type="hidden" name="next" value="{{ next }}" />
 </form>
