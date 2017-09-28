@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^get/(?P<pk>\d+)/$', httpbucket_views.RequestLogEntryDetailView.as_view(), name='replay_get'),
     url(r'^create/$', httpbucket_views.RequestLogEntryCreateView.as_view(), name='create_replay'),
     url(r'^admin/', admin.site.urls),
+    url('^', include('django.contrib.auth.urls')),
 ]
