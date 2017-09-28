@@ -29,7 +29,7 @@ class EchoView(View):
                 args[k] = v[0]
             else:
                 args[k] = v
-        response['args'] = args
+        response['args'] = json.dumps(args)
 
         # Add any headers we find in the request
         headers = {}
@@ -47,9 +47,10 @@ class EchoView(View):
 
             if new_key is not None:
                 headers[new_key.replace('_', '-').title()] = v
-        response['headers'] = headers
+        response['headers'] = json.dumps(headers)
 
         request_log_entry = models.RequestLogEntry(
+            user=self.request.user,
             method='GET',
             origin=response['origin'],
             uri=response['url'],
