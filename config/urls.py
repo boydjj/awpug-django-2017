@@ -20,10 +20,12 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import routers
 
 from httpbucket import views as httpbucket_views
+from httpbucket import view_sets as httpbucket_view_sets
 from registration import view_sets as registration_view_sets
 
 router = routers.DefaultRouter()
 router.register(r'users', registration_view_sets.UserViewSet)
+router.register(r'drf_entries', httpbucket_view_sets.RequestLogEntryViewSet)
 
 urlpatterns = [
     url(r'^$', httpbucket_views.hello_world),
