@@ -6,6 +6,7 @@ from django.views.generic import DetailView, CreateView, ListView
 
 from httpbucket import forms
 from . import models
+from . import utils
 
 
 def hello_world(request):
@@ -76,3 +77,10 @@ class RequestLogEntryListView(ListView):
 
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user)
+
+
+class MyEntriesJSONView(View):
+    def get(self, request):
+        entries = models.RequestLogEntry.objects.filter(user=request.user)
+        result = [utils.model_to_dict(entry) for entry in entries]
+        return HttpResponse(json.dumps(result), content_type='application/json')
