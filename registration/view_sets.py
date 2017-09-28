@@ -8,3 +8,4 @@ from . import serializers
 class UserViewSet(viewsets.ModelViewSet):
     queryset = auth_models.User.objects.all()
     serializer_class = serializers.UserSerializer
+    permission_classes = (permissions.IsAdminUser,)
