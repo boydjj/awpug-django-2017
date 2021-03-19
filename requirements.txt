@@ -3,7 +3,7 @@ chardet==3.0.4
 Django==1.11.3
 django-cors-headers==2.2.0
 django-oauth-toolkit==1.1.2
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 idna==2.6
 oauthlib==2.1.0
 pytz==2018.4
